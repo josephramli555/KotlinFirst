@@ -15,7 +15,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 class MainActivity : AppCompatActivity() {
 
     var leagueList : MutableList<LeagueItem> = mutableListOf()
-
+    public val IntentTitle:String= "Title"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                     layoutManager=LinearLayoutManager(context)
                     adapter=RecyclerViewAdapter(list){
                         startActivity<DescriptionActivity>(DescriptionActivity.POSITIONEXTRA to it)
-                        val toast = Toast.makeText(context, it.leaguename, Toast.LENGTH_SHORT)
+                        val toast = Toast.makeText(context, it.id, Toast.LENGTH_SHORT)
                         toast.show()
                     }
 
@@ -48,10 +48,10 @@ class MainActivity : AppCompatActivity() {
         val name = resources.getStringArray(R.array.league_name);
         val img = resources.obtainTypedArray(R.array.league_image)
         val desc = resources.getStringArray(R.array.league_description)
-
+        val leagueid = resources.getStringArray(R.array.league_id);
         leagueList.clear()
         for(i in name.indices){
-            leagueList.add(LeagueItem(name[i],img.getResourceId(i,0),desc[i]))
+            leagueList.add(LeagueItem(name[i],img.getResourceId(i,0),desc[i],leagueid[i]))
         }
         img.recycle()
     }
